@@ -1,3 +1,4 @@
+//  swap the number using only one pointer and suing recursion 
 #include<iostream>
 using namespace std;
 void pattern(int n1, int n2 ){
