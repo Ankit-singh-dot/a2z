@@ -54,5 +54,5 @@ int arr[n];
 for(int i = 0 ; i < n ; i++){
     cin >> arr[i] ;
 }
-remove_duplicate(arr, n)
+remove_duplicate(arr, n);
 }
