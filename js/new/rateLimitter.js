@@ -1,16 +1,18 @@
-import express from "express";
+import express, { json } from "express";
+import client from "./redis.js";
 const app = express();
 const users = {};
 const limit = 5;
 const window = 60 * 1000;
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   const currentTime = Date.now();
   const user = req.query.user;
-  if (!users[user]) {
-    users[user] = [];
+  let userData = await client.get(user);
+  if (userData) {
+    userData = JSON.parse(userData);
+  } else {
+    userData = [];
   }
-  const userData = users[user];
-  
   while (userData.length > 0 && currentTime - userData[0] >= window) {
     userData.shift();
   }
@@ -20,6 +22,7 @@ app.get("/", (req, res) => {
     });
   }
    userData.push(currentTime);
+  await client.set(user, JSON.stringify(userData));
   res.json({
     message: "user allowed",
     totalRequestInWindow: userData.length,
