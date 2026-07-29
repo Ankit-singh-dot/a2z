@@ -1,30 +1,32 @@
-// class Solution {
-// public:
-//     int majorityElement(vector<int>& nums) {
+#include<iostream>
+using namespace std ;
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
 
-//         int n = nums.size();
-//         int count = n / 2;
+        int n = nums.size();
+        int count = n / 2;
 
-//         for(int i = 0; i < n; i++)
-//         {
-//             int counts = 0;
+        for(int i = 0; i < n; i++)
+        {
+            int counts = 0;
 
-//             for(int j = 0; j < n; j++)
-//             {
-//                 if(nums[i] == nums[j])
-//                     counts++;
-//             }
+            for(int j = 0; j < n; j++)
+            {
+                if(nums[i] == nums[j])
+                    counts++;
+            }
 
-//             if(counts > count)
-//                 return nums[i];
-//         }
+            if(counts > count)
+                return nums[i];
+        }
 
-//         return -1;
-//     }
-// };
+        return -1;
+    }
+};
 
 
-
+// moore voting algorith ?
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
