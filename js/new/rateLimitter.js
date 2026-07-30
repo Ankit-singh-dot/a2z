@@ -54,7 +54,9 @@ app.get("/", async (req, res) => {
   const currrentTime = Date.now();
   await client.zRemRangeByScore(user, 0, currrentTime - window);
   const count = await client.zCard(user);
-  if (count > limit) {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  console.log("Count:", count);
+  if (count >= limit) {
     return res.status(429).json({
       message: "Rate Limit Exceeded",
     });
@@ -69,4 +71,8 @@ app.get("/", async (req, res) => {
     message: "Request Allowed",
     totalRequests: count + 1,
   });
+});
+
+app.listen(3000, () => {
+  console.log("listening to the port 3000");
 });
