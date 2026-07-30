@@ -1,1 +1,2 @@
-return "hello from lua"
+local user = KEYS[1]
+return user 
